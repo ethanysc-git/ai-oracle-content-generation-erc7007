@@ -71,7 +71,6 @@ contract Prompt is AIOracleCallbackReceiver, ERC7007Opml {
         bytes calldata output,
         bytes calldata callbackData
     ) external override onlyAIOracleCallback {
-        // since we do not set the callbackData in this example, the callbackData should be empty
         AIOracleRequest storage request = requests[requestId];
         require(request.sender != address(0), "request not exists");
         request.output = output;

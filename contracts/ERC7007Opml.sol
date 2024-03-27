@@ -11,6 +11,19 @@ import "./interfaces/IOpml.sol";
  */
 contract ERC7007Opml is ERC165, IERC7007Updatable, ERC721URIStorage {
     address public immutable opml = 0xF0794e464b0dAa63b84571D729CF42754b2Eb365;
+
+    /**
+     * @dev Emitted when `tokenId` token is minted.
+     */
+    event Mint2(
+        address indexed to,
+        uint256 indexed requestId,
+        bytes indexed prompt,
+        bytes aigcData,
+        string uri,
+        bytes proof
+    );
+
     mapping(uint256 => uint256) public tokenIdToRequestId;
 
     /**
@@ -75,7 +88,7 @@ contract ERC7007Opml is ERC165, IERC7007Updatable, ERC721URIStorage {
         );
         _setTokenURI(tokenId, tokenUri);
 
-        emit Mint(to, tokenId, prompt, aigcData, uri, proof);
+        emit Mint2(to, requestId, prompt, aigcData, uri, proof);
     }
 
     /**
