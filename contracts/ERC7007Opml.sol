@@ -67,7 +67,7 @@ contract ERC7007Opml is ERC165, IERC7007Updatable, ERC721URIStorage {
         bytes memory prompt,
         bytes memory aigcData,
         uint256 requestId,
-        string calldata uri,
+        string memory uri,
         bytes memory proof
     ) public returns (uint256 tokenId) {
         tokenId = uint256(keccak256(prompt));
@@ -75,20 +75,10 @@ contract ERC7007Opml is ERC165, IERC7007Updatable, ERC721URIStorage {
             tokenIdToRequestId[tokenId] = requestId;
             _safeMint(to, tokenId);
         }
-        string memory tokenUri = string(
-            abi.encodePacked(
-                "{",
-                uri,
-                ', "prompt": "',
-                string(prompt),
-                '", "aigc_data": "',
-                string(aigcData),
-                '"}'
-            )
-        );
+        string memory tokenUri = string(abi.encodePacked("ipfs://", uri));
         _setTokenURI(tokenId, tokenUri);
 
-        emit Mint2(to, requestId, prompt, aigcData, uri, proof);
+        emit Mint2(to, requestId, prompt, aigcData, tokenUri, proof);
     }
 
     /**

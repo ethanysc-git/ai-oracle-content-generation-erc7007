@@ -75,6 +75,7 @@ contract Prompt is AIOracleCallbackReceiver, ERC7007Opml {
         require(request.sender != address(0), "request not exists");
         request.output = output;
         prompts[request.modelId][string(request.input)] = string(output);
+
         if (request.modelId == 50) {
             mint2(request.sender, request.input, "", requestId, string(output), "");
         }
