@@ -1,5 +1,6 @@
-# Getting Started
-'''
+# AIGC Metadata
+
+```
 {
     "title": "AIGC Metadata",
     "type": "object",
@@ -35,5 +36,5 @@
         }
     }
 }
-'''
-## Requirements
+
+```
